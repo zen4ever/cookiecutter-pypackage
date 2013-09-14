@@ -14,16 +14,18 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
+from {{ cookiecutter.repo_name }} import __version__, __email__, __author__
+
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='{{ cookiecutter.repo_name }}',
-    version='{{ cookiecutter.version }}',
+    version=__version__,
     description='{{ cookiecutter.project_short_description }}',
     long_description=readme + '\n\n' + history,
-    author='{{ cookiecutter.full_name }}',
-    author_email='{{ cookiecutter.email }}',
+    author=__author__,
+    author_email=__email__,
     url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}',
     packages=[
         '{{ cookiecutter.repo_name }}',
